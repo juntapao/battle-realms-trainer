@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Excel Modifier</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Excel Modifier</h1>
+      <p class="lead">Select an Excel file and update any cell value.</p>
+
+      <form id="update-form" class="form">
+        <div class="field-group horizontal">
+          <label for="file-path">Excel File</label>
+          <div class="row">
+            <input id="file-path" name="filePath" type="text" placeholder="C:/path/to/file.xlsx" required />
+            <button id="pick-file-btn" type="button">Browse</button>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="output-path">Output File (optional, defaults to overwrite)</label>
+          <input id="output-path" name="outputPath" type="text" placeholder="C:/path/to/output.xlsx" />
+        </div>
+
+        <div class="field-group">
+          <label for="sheet-name">Sheet Name (optional, defaults to first sheet)</label>
+          <input id="sheet-name" name="sheetName" type="text" placeholder="Sheet1" />
+        </div>
+
+        <div class="field-group split">
+          <div>
+            <label for="cell-address">Cell Address</label>
+            <input id="cell-address" name="cellAddress" type="text" placeholder="B2" required />
+          </div>
+          <div>
+            <label for="value">New Value</label>
+            <input id="value" name="value" type="text" placeholder="123" required />
+          </div>
+        </div>
+
+        <button type="submit" class="submit">Update Cell</button>
+      </form>
+
+      <p id="status" class="status" data-tone="info">Ready.</p>
+    </main>
+
+    <script src="js/renderer.js"></script>
+  </body>
+</html>

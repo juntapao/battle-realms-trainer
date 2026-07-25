@@ -2,13 +2,16 @@
   "name": "battle-realms-trainer",
   "version": "1.0.0",
   "description": "Electron app for battle-realms-trainer",
-  "main": "main.js",
+  "main": "src/js/main.js",
   "scripts": {
     "start": "electron .",
     "dev": "electron ."
   },
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  },
   "devDependencies": {
     "electron": "^31.0.0"
   }
