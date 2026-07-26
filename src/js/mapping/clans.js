@@ -1,6 +1,8 @@
 const sheet = 'Data_Clans';
 const minTimeToCreatePeasant = 'AB';
 const maxTimeToCreatePeasant = 'AC';
+const peasantMaxRiceCapacity = 'D';
+const peasantMaxWaterCapacity = 'E';
 
 const CLAN_ROWS = Object.freeze({
   '0': [2],
@@ -17,5 +19,7 @@ module.exports = {
   sheet,
   minTimeToCreatePeasant,
   maxTimeToCreatePeasant,
+  peasantMaxRiceCapacity,
+  peasantMaxWaterCapacity,
   getClanRows
 };

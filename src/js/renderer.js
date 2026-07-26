@@ -30,7 +30,8 @@ form.addEventListener('submit', async (event) => {
   const payload = {
     filePath: String(formData.get('filePath') || '').trim(),
     clan: String(formData.get('clan') || '').trim(),
-    instantPeasantGeneration: formData.get('instantPeasantGeneration') === 'on'
+    instantPeasantGeneration: formData.get('instantPeasantGeneration') === 'on',
+    highCapacityPeasant: formData.get('highCapacityPeasant') === 'on'
   };
 
   if (!payload.clan) {

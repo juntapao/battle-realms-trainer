@@ -1,7 +1,7 @@
 const path = require('path');
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const XLSX = require('xlsx');
-require('dotenv').config();
+require('dotenv').config({ quiet: true });
 
 const EXCEL_PATH_ENV_KEY = 'FILE_PATH';
 
@@ -75,10 +75,14 @@ ipcMain.handle('excel:get-default-file-path', async () => {
 });
 
 ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
-  const { createBackupInDirectory, setInstantPeasantGeneration } = require('./functions');
+  const {
+    createBackupInDirectory,
+    setInstantPeasantGeneration,
+    setHighCapacityPeasant
+  } = require('./functions');
 
   try {
-    const { clan, instantPeasantGeneration } = payload || {};
+    const { clan, instantPeasantGeneration, highCapacityPeasant } = payload || {};
     const filePath = getExcelPathFromEnv();
 
     if (!filePath || !clan) {
@@ -96,6 +100,10 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
 
     if (instantPeasantGeneration) {
       setInstantPeasantGeneration(workbook, clan);
+    }
+
+    if (highCapacityPeasant) {
+      setHighCapacityPeasant(workbook, clan);
     }
 
     XLSX.writeFile(workbook, filePath);
