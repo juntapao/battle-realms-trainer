@@ -31,7 +31,8 @@ form.addEventListener('submit', async (event) => {
     filePath: String(formData.get('filePath') || '').trim(),
     clan: String(formData.get('clan') || '').trim(),
     instantPeasantGeneration: formData.get('instantPeasantGeneration') === 'on',
-    highCapacityPeasant: formData.get('highCapacityPeasant') === 'on'
+    highCapacityPeasant: formData.get('highCapacityPeasant') === 'on',
+    townSquareYinYangMultiplier: formData.get('townSquareYinYangMultiplier') === 'on',
   };
 
   if (!payload.clan) {

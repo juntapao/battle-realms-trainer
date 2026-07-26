@@ -50,8 +50,24 @@ function setHighCapacityPeasant(workbook, clan) {
   setCellValue(worksheet, peasantMaxWaterCapacity, row, currentPeasantMaxWaterCapacity * modMultiplier);
 }
 
+function setTownSquareYinYangMultiplier(workbook, clan) {
+  const {
+    sheet,
+    townSquareYinYangMultiplier,
+    getClanRows
+  } = require('./mapping/clans');
+  const modMultiplier = 10;
+  const worksheet = workbook.Sheets[sheet];
+  const [row] = getClanRows(clan);
+
+  const currentTownSquareYinYangMultiplier = getCellValue(worksheet, townSquareYinYangMultiplier, row);
+
+  setCellValue(worksheet, townSquareYinYangMultiplier, row, currentTownSquareYinYangMultiplier * modMultiplier);
+}
+
 module.exports = {
   createBackupInDirectory,
   setInstantPeasantGeneration,
-  setHighCapacityPeasant
+  setHighCapacityPeasant,
+  setTownSquareYinYangMultiplier
 };

@@ -3,6 +3,7 @@ const minTimeToCreatePeasant = 'AB';
 const maxTimeToCreatePeasant = 'AC';
 const peasantMaxRiceCapacity = 'D';
 const peasantMaxWaterCapacity = 'E';
+const townSquareYinYangMultiplier = 'AN';
 
 const CLAN_ROWS = Object.freeze({
   '0': [2],
@@ -21,5 +22,6 @@ module.exports = {
   maxTimeToCreatePeasant,
   peasantMaxRiceCapacity,
   peasantMaxWaterCapacity,
+  townSquareYinYangMultiplier,
   getClanRows
 };

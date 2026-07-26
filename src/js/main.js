@@ -78,11 +78,17 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
   const {
     createBackupInDirectory,
     setInstantPeasantGeneration,
-    setHighCapacityPeasant
+    setHighCapacityPeasant,
+    setTownSquareYinYangMultiplier
   } = require('./functions');
 
   try {
-    const { clan, instantPeasantGeneration, highCapacityPeasant } = payload || {};
+    const {
+      clan,
+      instantPeasantGeneration,
+      highCapacityPeasant,
+      townSquareYinYangMultiplier
+    } = payload || {};
     const filePath = getExcelPathFromEnv();
 
     if (!filePath || !clan) {
@@ -104,6 +110,10 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
 
     if (highCapacityPeasant) {
       setHighCapacityPeasant(workbook, clan);
+    }
+
+    if (townSquareYinYangMultiplier) {
+      setTownSquareYinYangMultiplier(workbook, clan);
     }
 
     XLSX.writeFile(workbook, filePath);
