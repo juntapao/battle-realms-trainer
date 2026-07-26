@@ -86,7 +86,8 @@ function setCheapTraining(workbook, clan) {
     sheet,
     riceTrainCost,
     waterTrainCost,
-    getUnitRows
+    getUnitRows,
+    getHeroUnitRows,
   } = require('./mapping/units');
   const {
     sheet: battleGearSheet,
@@ -97,12 +98,20 @@ function setCheapTraining(workbook, clan) {
   const modDivisor = 10;
   const worksheet = workbook.Sheets[sheet];
   const rows = getUnitRows(clan);
-
-  for (const row of rows) {
+  const setTrainCost = (worksheet, riceTrainCost, waterTrainCost, row, modDivisor) => {
     const currentRiceTrainCost = getCellValue(worksheet, riceTrainCost, row);
     const currentWaterTrainCost = getCellValue(worksheet, waterTrainCost, row);
     setCellValue(worksheet, riceTrainCost, row, Math.round(currentRiceTrainCost / modDivisor));
     setCellValue(worksheet, waterTrainCost, row, Math.round(currentWaterTrainCost / modDivisor));
+  }
+
+  for (const row of rows) {
+    setTrainCost(worksheet, riceTrainCost, waterTrainCost, row, modDivisor);
+  }
+
+  const heroRows = getHeroUnitRows(clan);
+  for (const row of heroRows) {
+    setTrainCost(worksheet, riceTrainCost, waterTrainCost, row, modDivisor);
   }
 
   const battleGearWorksheet = workbook.Sheets[battleGearSheet];
