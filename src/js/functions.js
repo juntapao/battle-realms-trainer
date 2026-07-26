@@ -130,6 +130,7 @@ function setFastTraining(workbook, clan) {
     unitTrainingTime1,
     unitTrainingTime2,
     unitTrainingTime3,
+    unitTrainingTime4,
     dockingTrainingTime,
     getBuildingRows,
     getBuildingWithDockingRows
@@ -147,6 +148,7 @@ function setFastTraining(workbook, clan) {
     setCellValue(worksheet, unitTrainingTime1, row, modValue);
     setCellValue(worksheet, unitTrainingTime2, row, modValue);
     setCellValue(worksheet, unitTrainingTime3, row, modValue);
+    setCellValue(worksheet, unitTrainingTime4, row, modValue);
   }
 
   const dockingRows = getBuildingWithDockingRows(clan);

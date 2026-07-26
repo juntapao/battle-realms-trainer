@@ -3,6 +3,7 @@ const buildTime = 'AX';
 const unitTrainingTime1 = 'Y';
 const unitTrainingTime2 = 'AC';
 const unitTrainingTime3 = 'AG';
+const unitTrainingTime4 = 'AK';
 const dockingTrainingTime = 'BL';
 
 const BUILDING_ROWS_BY_CLAN = {
@@ -30,6 +31,7 @@ module.exports = {
   unitTrainingTime1,
   unitTrainingTime2,
   unitTrainingTime3,
+  unitTrainingTime4,
   dockingTrainingTime,
   getBuildingRows,
   getBuildingWithDockingRows
