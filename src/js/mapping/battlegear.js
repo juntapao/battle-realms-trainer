@@ -5,6 +5,7 @@ const waterCost = 'C';
 
 const BATTLE_GEAR_ROWS_BY_CLAN = {
   '2': [51, 52, 53],
+  '5': [95, 100],
 };
 
 function getBattleGearRows(clan) {
