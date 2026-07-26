@@ -152,6 +152,22 @@ function setFastTraining(workbook, clan) {
   }
 }
 
+function setThirdTierYinYangMultiplier(workbook, clan) {
+  const {
+    sheet,
+    yinYangDamageIncrementor,
+    getThirdTierUnitRows
+  } = require('./mapping/units');
+  const modMultiplier = 10;
+  const worksheet = workbook.Sheets[sheet];
+  const rows = getThirdTierUnitRows(clan);
+
+  for (const row of rows) {
+    const currentYinYangDamageIncrementor = getCellValue(worksheet, yinYangDamageIncrementor, row);
+    setCellValue(worksheet, yinYangDamageIncrementor, row, (currentYinYangDamageIncrementor * modMultiplier) || 0.1);
+  }
+}
+
 module.exports = {
   createBackupInDirectory,
   setInstantPeasantGeneration,
@@ -159,5 +175,6 @@ module.exports = {
   setTownSquareYinYangMultiplier,
   setFastBuild,
   setCheapTraining,
-  setFastTraining
+  setFastTraining,
+  setThirdTierYinYangMultiplier
 };

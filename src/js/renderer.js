@@ -35,7 +35,8 @@ form.addEventListener('submit', async (event) => {
     townSquareYinYangMultiplier: formData.get('townSquareYinYangMultiplier') === 'on',
     fastBuild: formData.get('fastBuild') === 'on',
     cheapTraining: formData.get('cheapTraining') === 'on',
-    fastTraining: formData.get('fastTraining') === 'on'
+    fastTraining: formData.get('fastTraining') === 'on',
+    thirdTierYinYangMultiplier: formData.get('thirdTierYinYangMultiplier') === 'on',
   };
 
   if (!payload.clan) {

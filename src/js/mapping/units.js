@@ -1,6 +1,7 @@
 const sheet = 'Data_Units';
 const riceTrainCost = 'J';
 const waterTrainCost = 'K';
+const yinYangDamageIncrementor = 'T';
 
 const UNIT_ROWS_BY_CLAN = {
   '0': [2, 3, 4, 5, 6, 7, 8, 9, 10, 118, 119, 120, 121],
@@ -9,13 +10,26 @@ const UNIT_ROWS_BY_CLAN = {
   '5': [107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 155, 156]
 };
 
+const THIRD_TIER_UNIT_ROWS_BY_CLAN = {
+  '0': [9],
+  '2': [51],
+  '3': [73],
+  '5': [108]
+};
+
 function getUnitRows(clan) {
   return UNIT_ROWS_BY_CLAN[clan] || [];
+}
+
+function getThirdTierUnitRows(clan) {
+  return THIRD_TIER_UNIT_ROWS_BY_CLAN[clan] || [];
 }
 
 module.exports = {
   sheet,
   riceTrainCost,
   waterTrainCost,
-  getUnitRows
+  yinYangDamageIncrementor,
+  getUnitRows,
+  getThirdTierUnitRows
 };
