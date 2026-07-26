@@ -5,12 +5,12 @@ const peasantMaxRiceCapacity = 'D';
 const peasantMaxWaterCapacity = 'E';
 const townSquareYinYangMultiplier = 'AN';
 
-const CLAN_ROWS = Object.freeze({
+const CLAN_ROWS = {
   '0': [2],
   '2': [4],
   '3': [5],
   '5': [7]
-});
+};
 
 function getClanRows(clan) {
   return CLAN_ROWS[String(clan)] || [];

@@ -65,9 +65,26 @@ function setTownSquareYinYangMultiplier(workbook, clan) {
   setCellValue(worksheet, townSquareYinYangMultiplier, row, currentTownSquareYinYangMultiplier * modMultiplier);
 }
 
+function setFastBuild(workbook, clan) {
+  const {
+    sheet,
+    buildTime,
+    getBuildingRows
+  } = require('./mapping/buildings');
+  const modDivisor = 10;
+  const worksheet = workbook.Sheets[sheet];
+  const rows = getBuildingRows(clan);
+
+  for (const row of rows) {
+    const currentBuildTime = getCellValue(worksheet, buildTime, row);
+    setCellValue(worksheet, buildTime, row, currentBuildTime / modDivisor);
+  }
+}
+
 module.exports = {
   createBackupInDirectory,
   setInstantPeasantGeneration,
   setHighCapacityPeasant,
-  setTownSquareYinYangMultiplier
+  setTownSquareYinYangMultiplier,
+  setFastBuild
 };
