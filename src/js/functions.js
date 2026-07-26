@@ -163,7 +163,7 @@ function setFastTraining(workbook, clan) {
   }
 }
 
-function setThirdTierYinYangMultiplier(workbook, clan) {
+function setThirdTierYinYangDamageMultiplier(workbook, clan) {
   const {
     sheet,
     yinYangDamageIncrementor,
@@ -179,6 +179,22 @@ function setThirdTierYinYangMultiplier(workbook, clan) {
   }
 }
 
+function setHeroYinYangDamageMultiplier(workbook, clan) {
+  const {
+    sheet,
+    yinYangDamageIncrementor,
+    getHeroUnitRows
+  } = require('./mapping/units');
+  const modMultiplier = 10;
+  const worksheet = workbook.Sheets[sheet];
+  const rows = getHeroUnitRows(clan);
+
+  for (const row of rows) {
+    const currentYinYangDamageIncrementor = getCellValue(worksheet, yinYangDamageIncrementor, row);
+    setCellValue(worksheet, yinYangDamageIncrementor, row, (currentYinYangDamageIncrementor * modMultiplier) || 0.1);
+  }
+}
+
 module.exports = {
   createBackupInDirectory,
   setInstantPeasantGeneration,
@@ -187,5 +203,6 @@ module.exports = {
   setFastBuild,
   setCheapTraining,
   setFastTraining,
-  setThirdTierYinYangMultiplier
+  setThirdTierYinYangDamageMultiplier,
+  setHeroYinYangDamageMultiplier,
 };

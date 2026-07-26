@@ -83,7 +83,8 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
     setFastBuild,
     setCheapTraining,
     setFastTraining,
-    setThirdTierYinYangMultiplier,
+    setThirdTierYinYangDamageMultiplier,
+    setHeroYinYangDamageMultiplier,
   } = require('./functions');
 
   try {
@@ -95,7 +96,8 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
       fastBuild,
       cheapTraining,
       fastTraining,
-      thirdTierYinYangMultiplier,
+      thirdTierYinYangDamageMultiplier,
+      heroYinYangDamageMultiplier,
     } = payload || {};
     const filePath = getExcelPathFromEnv();
 
@@ -131,8 +133,12 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
       setFastTraining(workbook, clan);
     }
 
-    if (thirdTierYinYangMultiplier) {
-      setThirdTierYinYangMultiplier(workbook, clan);
+    if (thirdTierYinYangDamageMultiplier) {
+      setThirdTierYinYangDamageMultiplier(workbook, clan);
+    }
+
+    if (heroYinYangDamageMultiplier) {
+      setHeroYinYangDamageMultiplier(workbook, clan);
     }
 
     XLSX.writeFile(workbook, filePath);
@@ -146,7 +152,8 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
       fastBuild: Boolean(fastBuild),
       cheapTraining: Boolean(cheapTraining),
       fastTraining: Boolean(fastTraining),
-      thirdTierYinYangMultiplier: Boolean(thirdTierYinYangMultiplier),
+      thirdTierYinYangDamageMultiplier: Boolean(thirdTierYinYangDamageMultiplier),
+      heroYinYangDamageMultiplier: Boolean(heroYinYangDamageMultiplier),
       outputPath: filePath,
     };
   } catch (error) {
