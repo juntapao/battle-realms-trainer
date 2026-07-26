@@ -49,33 +49,35 @@ ipcMain.handle('excel:pick-file', async () => {
   return { canceled: false, filePath: result.filePaths[0] };
 });
 
-ipcMain.handle('excel:update-cell', async (_event, payload) => {
-  try {
-    const { filePath, sheetName, cellAddress, value, outputPath } = payload || {};
+ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
+  const { createBackupInDirectory, setInstantPeasantGeneration } = require('./functions');
 
-    if (!filePath || !cellAddress) {
-      throw new Error('filePath and cellAddress are required.');
+  try {
+    const { filePath, clan, instantPeasantGeneration } = payload || {};
+
+    if (!filePath || !clan) {
+      throw new Error('filePath and clan are required.');
     }
+
+    createBackupInDirectory(filePath);
 
     const workbook = XLSX.readFile(filePath);
-    const targetSheetName = sheetName && workbook.SheetNames.includes(sheetName)
-      ? sheetName
-      : workbook.SheetNames[0];
 
-    if (!targetSheetName) {
-      throw new Error('Workbook does not contain any sheets.');
+    const dataClansSheetName = 'Data_Clans';
+    if (!workbook.SheetNames.includes(dataClansSheetName)) {
+      throw new Error('Data_Clans sheet was not found in workbook.');
     }
 
-    const worksheet = workbook.Sheets[targetSheetName];
-    XLSX.utils.sheet_add_aoa(worksheet, [[value]], { origin: cellAddress });
+    setInstantPeasantGeneration(workbook, clan);
 
-    const destinationPath = outputPath && outputPath.trim() ? outputPath.trim() : filePath;
-    XLSX.writeFile(workbook, destinationPath);
+    XLSX.writeFile(workbook, filePath);
 
     return {
       ok: true,
-      sheetName: targetSheetName,
-      outputPath: destinationPath
+      clan,
+      instantPeasantGeneration: Boolean(instantPeasantGeneration),
+      sheetName: dataClansSheetName,
+      outputPath: filePath,
     };
   } catch (error) {
     return {

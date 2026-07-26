@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Excel Modifier</title>
+    <title>Battle Realms Trainer</title>
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
     <main class="container">
-      <h1>Excel Modifier</h1>
-      <p class="lead">Select an Excel file and update any cell value.</p>
+      <h1>Battle Realms Trainer</h1>
+      <p class="lead">Select an Excel file and apply clan trainer settings.</p>
 
       <form id="update-form" class="form">
         <div class="field-group horizontal">
@@ -21,27 +21,24 @@
         </div>
 
         <div class="field-group">
-          <label for="output-path">Output File (optional, defaults to overwrite)</label>
-          <input id="output-path" name="outputPath" type="text" placeholder="C:/path/to/output.xlsx" />
+          <label for="clan">Clan</label>
+          <select id="clan" name="clan" required>
+            <option value="" selected>- Select Clan -</option>
+            <option value="0">Dragon</option>
+            <option value="2">Serpent</option>
+            <option value="3">Wolf</option>
+            <option value="5">Lotus</option>
+          </select>
         </div>
 
         <div class="field-group">
-          <label for="sheet-name">Sheet Name (optional, defaults to first sheet)</label>
-          <input id="sheet-name" name="sheetName" type="text" placeholder="Sheet1" />
+          <label class="checkbox-label" for="instant-peasant-generation">
+            <input id="instant-peasant-generation" name="instantPeasantGeneration" type="checkbox" />
+            Instant Peasant Generation
+          </label>
         </div>
 
-        <div class="field-group split">
-          <div>
-            <label for="cell-address">Cell Address</label>
-            <input id="cell-address" name="cellAddress" type="text" placeholder="B2" required />
-          </div>
-          <div>
-            <label for="value">New Value</label>
-            <input id="value" name="value" type="text" placeholder="123" required />
-          </div>
-        </div>
-
-        <button type="submit" class="submit">Update Cell</button>
+        <button type="submit" class="submit">Apply Trainer Settings</button>
       </form>
 
       <p id="status" class="status" data-tone="info">Ready.</p>

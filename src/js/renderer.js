@@ -1,7 +1,6 @@
 const form = document.getElementById('update-form');
 const pickFileButton = document.getElementById('pick-file-btn');
 const filePathInput = document.getElementById('file-path');
-const outputPathInput = document.getElementById('output-path');
 const statusEl = document.getElementById('status');
 
 function setStatus(message, tone = 'info') {
@@ -14,10 +13,7 @@ pickFileButton.addEventListener('click', async () => {
 
   if (!result.canceled && result.filePath) {
     filePathInput.value = result.filePath;
-    if (!outputPathInput.value) {
-      outputPathInput.value = result.filePath;
-    }
-    setStatus('Excel file selected. Fill the other fields and click Update Cell.', 'success');
+    setStatus('Excel file selected. Choose a clan and apply trainer settings.', 'success');
   }
 });
 
@@ -27,25 +23,29 @@ form.addEventListener('submit', async (event) => {
   const formData = new FormData(form);
   const payload = {
     filePath: String(formData.get('filePath') || '').trim(),
-    outputPath: String(formData.get('outputPath') || '').trim(),
-    sheetName: String(formData.get('sheetName') || '').trim(),
-    cellAddress: String(formData.get('cellAddress') || '').trim().toUpperCase(),
-    value: String(formData.get('value') || '')
+    clan: String(formData.get('clan') || '').trim(),
+    instantPeasantGeneration: formData.get('instantPeasantGeneration') === 'on'
   };
 
-  if (!payload.filePath || !payload.cellAddress) {
-    setStatus('File path and cell address are required.', 'error');
+  if (!payload.filePath) {
+    setStatus('File path is required.', 'error');
     return;
   }
 
-  setStatus('Updating workbook...', 'info');
+  if (!payload.clan) {
+    setStatus('Please select a clan.', 'error');
+    return;
+  }
 
-  const result = await window.excelApi.updateCell(payload);
+  setStatus('Applying trainer settings...', 'info');
+
+  const result = await window.excelApi.applyTrainerSettings(payload);
 
   if (result.ok) {
-    setStatus(`Updated ${result.sheetName} and saved to ${result.outputPath}`, 'success');
+    const modeText = result.instantPeasantGeneration ? 'ON' : 'OFF';
+    setStatus(`Applied ${result.clan} settings (Instant Peasant Generation: ${modeText}) and saved to ${result.outputPath}. Backup: ${result.backupPath}`, 'success');
     return;
   }
 
-  setStatus(result.error || 'Failed to update workbook.', 'error');
+  setStatus(result.error || 'Failed to apply trainer settings.', 'error');
 });
