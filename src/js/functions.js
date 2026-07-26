@@ -81,10 +81,31 @@ function setFastBuild(workbook, clan) {
   }
 }
 
+function setCheapTraining(workbook, clan) {
+  const {
+    sheet,
+    riceTrainCost,
+    waterTrainCost,
+    getUnitRows
+  } = require('./mapping/units');
+  const modDivisor = 10;
+  const worksheet = workbook.Sheets[sheet];
+  const rows = getUnitRows(clan);
+
+  for (const row of rows) {
+    const currentRiceTrainCost = getCellValue(worksheet, riceTrainCost, row);
+    const currentWaterTrainCost = getCellValue(worksheet, waterTrainCost, row);
+
+    setCellValue(worksheet, riceTrainCost, row, Math.round(currentRiceTrainCost / modDivisor));
+    setCellValue(worksheet, waterTrainCost, row, Math.round(currentWaterTrainCost / modDivisor));
+  }
+}
+
 module.exports = {
   createBackupInDirectory,
   setInstantPeasantGeneration,
   setHighCapacityPeasant,
   setTownSquareYinYangMultiplier,
-  setFastBuild
+  setFastBuild,
+  setCheapTraining
 };

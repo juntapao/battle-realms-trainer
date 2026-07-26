@@ -34,6 +34,7 @@ form.addEventListener('submit', async (event) => {
     highCapacityPeasant: formData.get('highCapacityPeasant') === 'on',
     townSquareYinYangMultiplier: formData.get('townSquareYinYangMultiplier') === 'on',
     fastBuild: formData.get('fastBuild') === 'on',
+    cheapTraining: formData.get('cheapTraining') === 'on'
   };
 
   if (!payload.clan) {

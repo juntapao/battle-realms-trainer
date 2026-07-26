@@ -81,6 +81,7 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
     setHighCapacityPeasant,
     setTownSquareYinYangMultiplier,
     setFastBuild,
+    setCheapTraining,
   } = require('./functions');
 
   try {
@@ -90,6 +91,7 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
       highCapacityPeasant,
       townSquareYinYangMultiplier,
       fastBuild,
+      cheapTraining,
     } = payload || {};
     const filePath = getExcelPathFromEnv();
 
@@ -100,11 +102,6 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
     createBackupInDirectory(filePath);
 
     const workbook = XLSX.readFile(filePath);
-
-    const dataClansSheetName = 'Data_Clans';
-    if (!workbook.SheetNames.includes(dataClansSheetName)) {
-      throw new Error('Data_Clans sheet was not found in workbook.');
-    }
 
     if (instantPeasantGeneration) {
       setInstantPeasantGeneration(workbook, clan);
@@ -122,13 +119,20 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
       setFastBuild(workbook, clan);
     }
 
+    if (cheapTraining) {
+      setCheapTraining(workbook, clan);
+    }
+
     XLSX.writeFile(workbook, filePath);
 
     return {
       ok: true,
       clan,
       instantPeasantGeneration: Boolean(instantPeasantGeneration),
-      sheetName: dataClansSheetName,
+      highCapacityPeasant: Boolean(highCapacityPeasant),
+      townSquareYinYangMultiplier: Boolean(townSquareYinYangMultiplier),
+      fastBuild: Boolean(fastBuild),
+      cheapTraining: Boolean(cheapTraining),
       outputPath: filePath,
     };
   } catch (error) {

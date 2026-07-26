@@ -1,0 +1,21 @@
+const sheet = 'Data_Units';
+const riceTrainCost = 'J';
+const waterTrainCost = 'K';
+
+const UNIT_ROWS_BY_CLAN = {
+  '0': [2, 3, 4, 5, 6, 7, 8, 9, 10, 118, 119, 120, 121],
+  '2': [42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 131, 132],
+  '3': [19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 143, 144, 145, 146],
+  '5': [107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 155, 156]
+};
+
+function getUnitRows(clan) {
+  return UNIT_ROWS_BY_CLAN[clan] || [];
+}
+
+module.exports = {
+  sheet,
+  riceTrainCost,
+  waterTrainCost,
+  getUnitRows
+};
