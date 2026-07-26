@@ -10,10 +10,17 @@ function setStatus(message, tone = 'info') {
 
 window.addEventListener('DOMContentLoaded', async () => {
   const result = await window.excelApi.getDefaultFilePath();
-  if (result && result.filePath) {
-    filePathInput.value = result.filePath;
+  const defaultFilePath = typeof result?.filePath === 'string' ? result.filePath.trim() : '';
+
+  if (defaultFilePath) {
+    if (filePathInput) {
+      filePathInput.value = defaultFilePath;
+    }
     setStatus('Excel file path loaded from environment variable.', 'success');
+    return;
   }
+
+  setStatus('No default Excel file path found in environment variables.', 'info');
 });
 
 form.addEventListener('submit', async (event) => {
