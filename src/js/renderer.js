@@ -8,12 +8,11 @@ function setStatus(message, tone = 'info') {
   statusEl.dataset.tone = tone;
 }
 
-pickFileButton.addEventListener('click', async () => {
-  const result = await window.excelApi.pickFile();
-
-  if (!result.canceled && result.filePath) {
+window.addEventListener('DOMContentLoaded', async () => {
+  const result = await window.excelApi.getDefaultFilePath();
+  if (result && result.filePath) {
     filePathInput.value = result.filePath;
-    setStatus('Excel file selected. Choose a clan and apply trainer settings.', 'success');
+    setStatus('Excel file path loaded from environment variable.', 'success');
   }
 });
 
@@ -26,11 +25,6 @@ form.addEventListener('submit', async (event) => {
     clan: String(formData.get('clan') || '').trim(),
     instantPeasantGeneration: formData.get('instantPeasantGeneration') === 'on'
   };
-
-  if (!payload.filePath) {
-    setStatus('File path is required.', 'error');
-    return;
-  }
 
   if (!payload.clan) {
     setStatus('Please select a clan.', 'error');

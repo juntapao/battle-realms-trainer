@@ -1,6 +1,23 @@
 const path = require('path');
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const XLSX = require('xlsx');
+require('dotenv').config();
+
+const EXCEL_PATH_ENV_KEY = 'FILE_PATH';
+
+function getExcelPathFromEnv() {
+  const value = process.env[EXCEL_PATH_ENV_KEY];
+  if (typeof value !== 'string') {
+    return '';
+  }
+
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return '';
+  }
+
+  return trimmed;
+}
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -49,14 +66,23 @@ ipcMain.handle('excel:pick-file', async () => {
   return { canceled: false, filePath: result.filePaths[0] };
 });
 
+ipcMain.handle('excel:get-default-file-path', async () => {
+  return {
+    filePath: getExcelPathFromEnv(),
+    source: 'env',
+    envKeys: [EXCEL_PATH_ENV_KEY]
+  };
+});
+
 ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
   const { createBackupInDirectory, setInstantPeasantGeneration } = require('./functions');
 
   try {
-    const { filePath, clan, instantPeasantGeneration } = payload || {};
+    const { clan, instantPeasantGeneration } = payload || {};
+    const filePath = getExcelPathFromEnv();
 
     if (!filePath || !clan) {
-      throw new Error('filePath and clan are required.');
+      throw new Error(`clan is required and file path must be provided via env (${EXCEL_PATH_ENV_KEY}).`);
     }
 
     createBackupInDirectory(filePath);

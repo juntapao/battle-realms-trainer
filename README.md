@@ -14,7 +14,10 @@ Electron desktop app to modify Excel files (`.xlsx`, `.xlsm`, `.xls`, `.csv`).
    ```bash
    npm install
    ```
-2. Start the app:
+2. Configure environment variable for workbook path:
+   - Copy `.env.example` to `.env`
+   - Set `FILE_PATH` to your Battle Realms workbook path
+3. Start the app:
    ```bash
    npm start
    ```
