@@ -1,5 +1,9 @@
 const sheet = 'Data_Buildings';
 const buildTime = 'AX';
+const unitTrainingTime1 = 'Y';
+const unitTrainingTime2 = 'AC';
+const unitTrainingTime3 = 'AG';
+const dockingTrainingTime = 'BL';
 
 const BUILDING_ROWS_BY_CLAN = {
   '0': [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 86],
@@ -8,12 +12,25 @@ const BUILDING_ROWS_BY_CLAN = {
   '5': [72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 112]
 };
 
+const BUILDING_WITH_DOCKING_ROWS_BY_CLAN = {
+  '2': [28],
+};
+
 function getBuildingRows(clan) {
   return BUILDING_ROWS_BY_CLAN[clan] || [];
+}
+
+function getBuildingWithDockingRows(clan) {
+  return BUILDING_WITH_DOCKING_ROWS_BY_CLAN[clan] || [];
 }
 
 module.exports = {
   sheet,
   buildTime,
-  getBuildingRows
+  unitTrainingTime1,
+  unitTrainingTime2,
+  unitTrainingTime3,
+  dockingTrainingTime,
+  getBuildingRows,
+  getBuildingWithDockingRows
 };

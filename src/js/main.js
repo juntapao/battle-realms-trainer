@@ -82,6 +82,7 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
     setTownSquareYinYangMultiplier,
     setFastBuild,
     setCheapTraining,
+    setFastTraining,
   } = require('./functions');
 
   try {
@@ -92,6 +93,7 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
       townSquareYinYangMultiplier,
       fastBuild,
       cheapTraining,
+      fastTraining,
     } = payload || {};
     const filePath = getExcelPathFromEnv();
 
@@ -123,6 +125,10 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
       setCheapTraining(workbook, clan);
     }
 
+    if (fastTraining) {
+      setFastTraining(workbook, clan);
+    }
+
     XLSX.writeFile(workbook, filePath);
 
     return {
@@ -133,6 +139,7 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
       townSquareYinYangMultiplier: Boolean(townSquareYinYangMultiplier),
       fastBuild: Boolean(fastBuild),
       cheapTraining: Boolean(cheapTraining),
+      fastTraining: Boolean(fastTraining),
       outputPath: filePath,
     };
   } catch (error) {

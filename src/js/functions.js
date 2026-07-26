@@ -101,11 +101,49 @@ function setCheapTraining(workbook, clan) {
   }
 }
 
+function setFastTraining(workbook, clan) {
+  const {
+    sheet,
+    unitTrainingTime1,
+    unitTrainingTime2,
+    unitTrainingTime3,
+    dockingTrainingTime,
+    getBuildingRows,
+    getBuildingWithDockingRows
+  } = require('./mapping/buildings');
+  const {
+    sheet: battleGearSheet,
+    time: battleGearTrainingTime,
+    getBattleGearRows
+  } = require('./mapping/battlegear');
+  const modValue = 1;
+  const worksheet = workbook.Sheets[sheet];
+
+  const rows = getBuildingRows(clan);
+  for (const row of rows) {
+    setCellValue(worksheet, unitTrainingTime1, row, modValue);
+    setCellValue(worksheet, unitTrainingTime2, row, modValue);
+    setCellValue(worksheet, unitTrainingTime3, row, modValue);
+  }
+
+  const dockingRows = getBuildingWithDockingRows(clan);
+  for (const row of dockingRows) {
+    setCellValue(worksheet, dockingTrainingTime, row, modValue);
+  }
+
+  const battleGearWorksheet = workbook.Sheets[battleGearSheet];
+  const battleGearRows = getBattleGearRows(clan);
+  for (const row of battleGearRows) {
+    setCellValue(battleGearWorksheet, battleGearTrainingTime, row, modValue);
+  }
+}
+
 module.exports = {
   createBackupInDirectory,
   setInstantPeasantGeneration,
   setHighCapacityPeasant,
   setTownSquareYinYangMultiplier,
   setFastBuild,
-  setCheapTraining
+  setCheapTraining,
+  setFastTraining
 };
