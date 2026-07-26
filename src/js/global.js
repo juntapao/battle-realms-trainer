@@ -3,7 +3,7 @@ const path = require('path');
 function getBackupFileName(sourceFilePath) {
   const addName = 'backup';
   const parsed = path.parse(sourceFilePath);
-  return `${parsed.name}.${addName}.${parsed.ext}`;
+  return `${parsed.name}.${addName}${parsed.ext}`;
 }
 
 function getCellValue(worksheet, column, row) {
