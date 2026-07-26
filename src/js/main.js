@@ -94,7 +94,9 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
       throw new Error('Data_Clans sheet was not found in workbook.');
     }
 
-    setInstantPeasantGeneration(workbook, clan);
+    if (instantPeasantGeneration) {
+      setInstantPeasantGeneration(workbook, clan);
+    }
 
     XLSX.writeFile(workbook, filePath);
 
