@@ -38,6 +38,7 @@ form.addEventListener('submit', async (event) => {
     fastTraining: formData.get('fastTraining') === 'on',
     thirdTierYinYangDamageMultiplier: formData.get('thirdTierYinYangDamageMultiplier') === 'on',
     heroYinYangDamageMultiplier: formData.get('heroYinYangDamageMultiplier') === 'on',
+    doubleInitialResources: formData.get('doubleInitialResources') === 'on',
   };
 
   if (!payload.clan) {

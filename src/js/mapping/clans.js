@@ -4,6 +4,12 @@ const maxTimeToCreatePeasant = 'AC';
 const peasantMaxRiceCapacity = 'D';
 const peasantMaxWaterCapacity = 'E';
 const townSquareYinYangMultiplier = 'AN';
+const initialRiceCapacity = 'I';
+const initialRiceDefault = 'J';
+const riceCapacityPerHut = 'K';
+const initialWaterCapacity = 'P';
+const initialWaterDefault = 'Q';
+const waterCapacityPerHut = 'R';
 
 const CLAN_ROWS = {
   '0': [2],
@@ -23,5 +29,11 @@ module.exports = {
   peasantMaxRiceCapacity,
   peasantMaxWaterCapacity,
   townSquareYinYangMultiplier,
-  getClanRows
+  initialRiceCapacity,
+  initialRiceDefault,
+  riceCapacityPerHut,
+  initialWaterCapacity,
+  initialWaterDefault,
+  waterCapacityPerHut,
+  getClanRows,
 };

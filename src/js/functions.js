@@ -195,6 +195,34 @@ function setHeroYinYangDamageMultiplier(workbook, clan) {
   }
 }
 
+function setDoubleInitialResources(workbook, clan) {
+  const {
+    sheet,
+    initialRiceCapacity,
+    initialRiceDefault,
+    riceCapacityPerHut,
+    initialWaterCapacity,
+    initialWaterDefault,
+    waterCapacityPerHut,
+    getClanRows
+  } = require('./mapping/clans');
+  const modMultiplier = 2;
+  const worksheet = workbook.Sheets[sheet];
+  const [row] = getClanRows(clan);
+
+  const currentInitialRiceCapacity = getCellValue(worksheet, initialRiceCapacity, row);
+  const currentRiceCapacityPerHut = getCellValue(worksheet, riceCapacityPerHut, row);
+  const currentInitialWaterCapacity = getCellValue(worksheet, initialWaterCapacity, row);
+  const currentWaterCapacityPerHut = getCellValue(worksheet, waterCapacityPerHut, row);
+
+  setCellValue(worksheet, initialRiceCapacity, row, currentInitialRiceCapacity * modMultiplier);
+  setCellValue(worksheet, initialRiceDefault, row, currentInitialRiceCapacity * modMultiplier);
+  setCellValue(worksheet, riceCapacityPerHut, row, currentRiceCapacityPerHut * modMultiplier);
+  setCellValue(worksheet, initialWaterCapacity, row, currentInitialWaterCapacity * modMultiplier);
+  setCellValue(worksheet, initialWaterDefault, row, currentInitialWaterCapacity * modMultiplier);
+  setCellValue(worksheet, waterCapacityPerHut, row, currentWaterCapacityPerHut * modMultiplier);
+}
+
 module.exports = {
   createBackupInDirectory,
   setInstantPeasantGeneration,
@@ -205,4 +233,5 @@ module.exports = {
   setFastTraining,
   setThirdTierYinYangDamageMultiplier,
   setHeroYinYangDamageMultiplier,
+  setDoubleInitialResources,
 };
