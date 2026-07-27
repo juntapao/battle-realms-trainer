@@ -5,6 +5,8 @@ const unitTrainingTime2 = 'AC';
 const unitTrainingTime3 = 'AG';
 const unitTrainingTime4 = 'AK';
 const dockingTrainingTime = 'BL';
+const riceCost = 'P';
+const waterCost = 'Q';
 
 const BUILDING_ROWS_BY_CLAN = {
   '0': [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 86],
@@ -33,6 +35,8 @@ module.exports = {
   unitTrainingTime3,
   unitTrainingTime4,
   dockingTrainingTime,
+  riceCost,
+  waterCost,
   getBuildingRows,
   getBuildingWithDockingRows
 };

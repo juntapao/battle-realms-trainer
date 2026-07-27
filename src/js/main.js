@@ -86,6 +86,7 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
     setThirdTierYinYangDamageMultiplier,
     setHeroYinYangDamageMultiplier,
     setDoubleInitialResources,
+    setCheapBuildings,
   } = require('./functions');
 
   try {
@@ -100,6 +101,7 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
       thirdTierYinYangDamageMultiplier,
       heroYinYangDamageMultiplier,
       doubleInitialResources,
+      cheapBuildings,
     } = payload || {};
     const filePath = getExcelPathFromEnv();
 
@@ -147,6 +149,10 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
       setDoubleInitialResources(workbook, clan);
     }
 
+    if (cheapBuildings) {
+      setCheapBuildings(workbook, clan);
+    }
+
     XLSX.writeFile(workbook, filePath);
 
     return {
@@ -161,6 +167,7 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
       thirdTierYinYangDamageMultiplier: Boolean(thirdTierYinYangDamageMultiplier),
       heroYinYangDamageMultiplier: Boolean(heroYinYangDamageMultiplier),
       doubleInitialResources: Boolean(doubleInitialResources),
+      cheapBuildings: Boolean(cheapBuildings),
       outputPath: filePath,
     };
   } catch (error) {

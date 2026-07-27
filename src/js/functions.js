@@ -223,6 +223,25 @@ function setDoubleInitialResources(workbook, clan) {
   setCellValue(worksheet, waterCapacityPerHut, row, currentWaterCapacityPerHut * modMultiplier);
 }
 
+function setCheapBuildings(workbook, clan) {
+  const {
+    sheet,
+    riceCost,
+    waterCost,
+    getBuildingRows
+  } = require('./mapping/buildings');
+  const modDivisor = 10;
+  const worksheet = workbook.Sheets[sheet];
+  const rows = getBuildingRows(clan);
+
+  for (const row of rows) {
+    const currentRiceCost = getCellValue(worksheet, riceCost, row);
+    const currentWaterCost = getCellValue(worksheet, waterCost, row);
+    setCellValue(worksheet, riceCost, row, Math.round(currentRiceCost / modDivisor));
+    setCellValue(worksheet, waterCost, row, Math.round(currentWaterCost / modDivisor));
+  }
+}
+
 module.exports = {
   createBackupInDirectory,
   setInstantPeasantGeneration,
@@ -234,4 +253,5 @@ module.exports = {
   setThirdTierYinYangDamageMultiplier,
   setHeroYinYangDamageMultiplier,
   setDoubleInitialResources,
+  setCheapBuildings,
 };

@@ -39,6 +39,7 @@ form.addEventListener('submit', async (event) => {
     thirdTierYinYangDamageMultiplier: formData.get('thirdTierYinYangDamageMultiplier') === 'on',
     heroYinYangDamageMultiplier: formData.get('heroYinYangDamageMultiplier') === 'on',
     doubleInitialResources: formData.get('doubleInitialResources') === 'on',
+    cheapBuildings: formData.get('cheapBuildings') === 'on',
   };
 
   if (!payload.clan) {
