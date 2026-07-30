@@ -40,6 +40,7 @@ form.addEventListener('submit', async (event) => {
     heroYinYangDamageMultiplier: formData.get('heroYinYangDamageMultiplier') === 'on',
     doubleInitialResources: formData.get('doubleInitialResources') === 'on',
     cheapBuildings: formData.get('cheapBuildings') === 'on',
+    highStaminaUnits: formData.get('highStaminaUnits') === 'on',
   };
 
   if (!payload.clan) {

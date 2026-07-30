@@ -2,6 +2,9 @@ const sheet = 'Data_Units';
 const riceTrainCost = 'J';
 const waterTrainCost = 'K';
 const yinYangDamageIncrementor = 'T';
+const initialFatigue = 'Q';
+const maxFatigue = 'R';
+const fatigueRecovery = 'S';
 
 const UNIT_ROWS_BY_CLAN = {
   '0': [2, 3, 4, 5, 6, 7, 8, 9, 10, 118, 119, 120, 121],
@@ -41,6 +44,9 @@ module.exports = {
   riceTrainCost,
   waterTrainCost,
   yinYangDamageIncrementor,
+  initialFatigue,
+  maxFatigue,
+  fatigueRecovery,
   getUnitRows,
   getThirdTierUnitRows,
   getHeroUnitRows

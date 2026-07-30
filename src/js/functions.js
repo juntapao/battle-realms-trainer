@@ -97,21 +97,22 @@ function setCheapTraining(workbook, clan) {
   } = require('./mapping/battlegear');
   const modDivisor = 10;
   const worksheet = workbook.Sheets[sheet];
-  const rows = getUnitRows(clan);
-  const setTrainCost = (worksheet, riceTrainCost, waterTrainCost, row, modDivisor) => {
+
+  const setTrainCost = (row) => {
     const currentRiceTrainCost = getCellValue(worksheet, riceTrainCost, row);
     const currentWaterTrainCost = getCellValue(worksheet, waterTrainCost, row);
     setCellValue(worksheet, riceTrainCost, row, Math.round(currentRiceTrainCost / modDivisor));
     setCellValue(worksheet, waterTrainCost, row, Math.round(currentWaterTrainCost / modDivisor));
   }
 
+  const rows = getUnitRows(clan);
   for (const row of rows) {
-    setTrainCost(worksheet, riceTrainCost, waterTrainCost, row, modDivisor);
+    setTrainCost(row);
   }
 
   const heroRows = getHeroUnitRows(clan);
   for (const row of heroRows) {
-    setTrainCost(worksheet, riceTrainCost, waterTrainCost, row, modDivisor);
+    setTrainCost(row);
   }
 
   const battleGearWorksheet = workbook.Sheets[battleGearSheet];
@@ -242,6 +243,37 @@ function setCheapBuildings(workbook, clan) {
   }
 }
 
+function setHighStaminaUnits(workbook, clan) {
+  const {
+    sheet,
+    initialFatigue,
+    maxFatigue,
+    fatigueRecovery,
+    getUnitRows,
+    getHeroUnitRows,
+  } = require('./mapping/units');
+  const modifier = 10;
+  const worksheet = workbook.Sheets[sheet];
+
+  const setFatigue = (row) => {
+    const currentInitialFatigue = getCellValue(worksheet, initialFatigue, row);
+    const currentMaxFatigue = getCellValue(worksheet, maxFatigue, row);
+    setCellValue(worksheet, initialFatigue, row, (currentInitialFatigue * modifier));
+    setCellValue(worksheet, maxFatigue, row, (currentMaxFatigue * modifier));
+    setCellValue(worksheet, fatigueRecovery, row, modifier);
+  }
+
+  const rows = getUnitRows(clan);
+  for (const row of rows) {
+    setFatigue(row);
+  }
+
+  const heroRows = getHeroUnitRows(clan);
+  for (const row of heroRows) {
+    setFatigue(row);
+  }
+}
+
 module.exports = {
   createBackupInDirectory,
   setInstantPeasantGeneration,
@@ -254,4 +286,5 @@ module.exports = {
   setHeroYinYangDamageMultiplier,
   setDoubleInitialResources,
   setCheapBuildings,
+  setHighStaminaUnits,
 };
