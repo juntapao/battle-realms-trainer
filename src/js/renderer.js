@@ -41,6 +41,7 @@ form.addEventListener('submit', async (event) => {
     doubleInitialResources: formData.get('doubleInitialResources') === 'on',
     cheapBuildings: formData.get('cheapBuildings') === 'on',
     highStaminaUnits: formData.get('highStaminaUnits') === 'on',
+    highHealthUnits: formData.get('highHealthUnits') === 'on',
   };
 
   if (!payload.clan) {

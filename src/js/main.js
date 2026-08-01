@@ -88,6 +88,7 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
     setDoubleInitialResources,
     setCheapBuildings,
     setHighStaminaUnits,
+    setHighHealthUnits,
   } = require('./functions');
 
   try {
@@ -104,6 +105,7 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
       doubleInitialResources,
       cheapBuildings,
       highStaminaUnits,
+      highHealthUnits,
     } = payload || {};
     const filePath = getExcelPathFromEnv();
 
@@ -159,6 +161,10 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
       setHighStaminaUnits(workbook, clan);
     }
 
+    if (highHealthUnits) {
+      setHighHealthUnits(workbook, clan);
+    }
+
     XLSX.writeFile(workbook, filePath);
 
     return {
@@ -175,6 +181,7 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
       doubleInitialResources: Boolean(doubleInitialResources),
       cheapBuildings: Boolean(cheapBuildings),
       highStaminaUnits: Boolean(highStaminaUnits),
+      highHealthUnits: Boolean(highHealthUnits),
       outputPath: filePath,
     };
   } catch (error) {

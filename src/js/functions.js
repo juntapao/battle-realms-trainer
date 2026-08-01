@@ -274,6 +274,40 @@ function setHighStaminaUnits(workbook, clan) {
   }
 }
 
+function setHighHealthUnits(workbook, clan) {
+  const {
+    sheet,
+    maxHealth,
+    maxHealthRecovery,
+    healthRecoveryRate,
+    initialHealth,
+    getUnitRows,
+    getHeroUnitRows,
+  } = require('./mapping/units');
+  const modifier = 10;
+  const worksheet = workbook.Sheets[sheet];
+
+  const setHealth = (row) => {
+    const currentMaxHealth = getCellValue(worksheet, maxHealth, row);
+    const currentMaxHealthRecovery = getCellValue(worksheet, maxHealthRecovery, row);
+    const currentInitialHealth = getCellValue(worksheet, initialHealth, row);
+    setCellValue(worksheet, maxHealth, row, (currentMaxHealth * modifier));
+    setCellValue(worksheet, maxHealthRecovery, row, (currentMaxHealthRecovery * modifier));
+    setCellValue(worksheet, healthRecoveryRate, row, modifier);
+    setCellValue(worksheet, initialHealth, row, (currentInitialHealth * modifier));
+  }
+
+  const rows = getUnitRows(clan);
+  for (const row of rows) {
+    setHealth(row);
+  }
+
+  const heroRows = getHeroUnitRows(clan);
+  for (const row of heroRows) {
+    setHealth(row);
+  }
+}
+
 module.exports = {
   createBackupInDirectory,
   setInstantPeasantGeneration,
@@ -287,4 +321,5 @@ module.exports = {
   setDoubleInitialResources,
   setCheapBuildings,
   setHighStaminaUnits,
+  setHighHealthUnits,
 };

@@ -5,6 +5,10 @@ const yinYangDamageIncrementor = 'T';
 const initialFatigue = 'Q';
 const maxFatigue = 'R';
 const fatigueRecovery = 'S';
+const maxHealth = 'M';
+const maxHealthRecovery = 'N';
+const healthRecoveryRate = 'O';
+const initialHealth = 'P';
 
 const UNIT_ROWS_BY_CLAN = {
   '0': [2, 3, 4, 5, 6, 7, 8, 9, 10, 118, 119, 120, 121],
@@ -47,6 +51,10 @@ module.exports = {
   initialFatigue,
   maxFatigue,
   fatigueRecovery,
+  maxHealth,
+  maxHealthRecovery,
+  healthRecoveryRate,
+  initialHealth,
   getUnitRows,
   getThirdTierUnitRows,
   getHeroUnitRows
