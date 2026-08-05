@@ -89,6 +89,7 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
     setCheapBuildings,
     setHighStaminaUnits,
     setHighHealthUnits,
+    setHighHealthRecoveryRate,
   } = require('./functions');
 
   try {
@@ -106,6 +107,7 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
       cheapBuildings,
       highStaminaUnits,
       highHealthUnits,
+      highHealthRecoveryRate,
     } = payload || {};
     const filePath = getExcelPathFromEnv();
 
@@ -165,6 +167,10 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
       setHighHealthUnits(workbook, clan);
     }
 
+    if (highHealthRecoveryRate) {
+      setHighHealthRecoveryRate(workbook, clan);
+    }
+
     XLSX.writeFile(workbook, filePath);
 
     return {
@@ -182,6 +188,7 @@ ipcMain.handle('excel:apply-trainer-settings', async (_event, payload) => {
       cheapBuildings: Boolean(cheapBuildings),
       highStaminaUnits: Boolean(highStaminaUnits),
       highHealthUnits: Boolean(highHealthUnits),
+      highHealthRecoveryRate: Boolean(highHealthRecoveryRate),
       outputPath: filePath,
     };
   } catch (error) {

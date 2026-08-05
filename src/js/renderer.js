@@ -3,6 +3,7 @@ const pickFileButton = document.getElementById('pick-file-btn');
 const filePathInput = document.getElementById('file-path');
 const statusEl = document.getElementById('status');
 const selectALlCheckbox = document.getElementById('select-all');
+const highHealthUnitsCheckbox = document.getElementById('high-health-units');
 
 function setStatus(message, tone = 'info') {
   statusEl.textContent = message;
@@ -51,6 +52,7 @@ form.addEventListener('submit', async (event) => {
     cheapBuildings: formData.get('cheapBuildings') === 'on',
     highStaminaUnits: formData.get('highStaminaUnits') === 'on',
     highHealthUnits: formData.get('highHealthUnits') === 'on',
+    highHealthRecoveryRate: formData.get('highHealthRecoveryRate') === 'on',
   };
 
   if (!payload.clan) {
