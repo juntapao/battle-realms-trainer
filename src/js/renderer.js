@@ -2,6 +2,7 @@ const form = document.getElementById('update-form');
 const pickFileButton = document.getElementById('pick-file-btn');
 const filePathInput = document.getElementById('file-path');
 const statusEl = document.getElementById('status');
+const selectALlCheckbox = document.getElementById('select-all');
 
 function setStatus(message, tone = 'info') {
   statusEl.textContent = message;
@@ -21,6 +22,14 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 
   setStatus('No default Excel file path found in environment variables.', 'info');
+});
+
+selectALlCheckbox.addEventListener('change', () => {
+  const isChecked = selectALlCheckbox.checked;
+  const checkboxes = form.querySelectorAll('input[type="checkbox"]:not(#select-all)');
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = isChecked;
+  });
 });
 
 form.addEventListener('submit', async (event) => {
